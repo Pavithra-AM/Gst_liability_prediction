@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><b>Fraudulent Transaction Detection</b></title> <!-- This can't be styled directly -->
+    <body style="background-color: #808000;"> <!-- Olive Green -->
+
+    <style>
+        /* Change color of header in the body */
+        h1 {
+            color: #FF6347; /* Tomato color */
+        }
+    </style>   
+     <style>
+        /* Solid background color for the page */
+        body {
+            background-color: #f0f8ff; /* Light blue background, change this to any color you want */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for the content area */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds shadow for better visual */
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .file-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50; /* Green background for header */
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Fraudulent Transaction Detection</h1>
+        <div class="file-upload">
+            <form action="/fraudulent" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv, .xlsx" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        {% if error %}
+            <div class="error-message">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if fraud_count is not none %}
+            <div class="result">
+                <h2>Total Fraudulent Transactions: {{ fraud_count }}</h2>
+            </div>
+        {% endif %}
+
+        {% if result %}
+            <div class="result">
+                <h2 style="color: red;">Fraudulent Transactions Found:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invoice ID</th>
+                            <th>Invoice Amount</th>
+                            <th>Invoice Text</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in result %}
+                            <tr>
+                                <td>{{ row.InvoiceID }}</td>
+                                <td>{{ row.InvoiceAmount }}</td>
+                                <td>{{ row.InvoiceText }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="result">
+                <p>No fraudulent transactions found in the uploaded file.</p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

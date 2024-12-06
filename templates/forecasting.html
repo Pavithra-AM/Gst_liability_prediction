@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+        <body style="background-color: #808000;"> <!-- Olive Green -->
+
+    <style>
+        /* Background and page styling */
+        body {
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 50px;
+            font-size: 3em;
+            color: #ff6347; /* Tomato color */
+        }
+
+        /* Container styling with transparency */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background with more opacity */
+            border-radius: 15px;
+            margin-top: 50px;
+            width: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Form styling */
+        .form-group {
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            padding: 12px;
+            width: 100%;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: none;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            outline: none;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #ff6347; /* Tomato color */
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e53e2f; /* Darker Tomato */
+        }
+
+        /* Display prediction result styling */
+        .prediction {
+            text-align: center;
+            padding: 25px;
+            background-color: #f9f9f9;
+            color: #333;
+            border-radius: 12px;
+            margin-top: 20px;
+            width: 100%;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Small text for the range hints */
+        small {
+            color: #f5f5f5; /* Light color for range hints */
+            font-size: 0.9em;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                width: 80%;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="color: #005792;">GST Forecasting</h1> <!-- Title with new color -->
+    </header>
+    
+    <!-- Container for the form -->
+    <div class="container">
+        <!-- Display error messages if any -->
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <!-- GST Forecasting Form -->
+        <form action="/forecasting" method="POST">
+            <div class="form-group">
+                <label for="sales_amount">Sales Amount:</label>
+                <input type="number" step="any" name="sales_amount" id="sales_amount" required>
+                <small>Range: ₹0 to ₹100,000,000</small>
+            </div>
+
+            <div class="form-group">
+                <label for="purchase_amount">Purchase Amount:</label>
+                <input type="number" step="any" name="purchase_amount" id="purchase_amount" required>
+                <small>Range: ₹0 to ₹50,000,000</small>
+            </div>
+
+            <div class="form-group">
+                <label for="tax_slab">Tax Slab:</label>
+                <input type="number" step="any" name="tax_slab" id="tax_slab" required>
+                <small>Range: 1% to 28%</small>
+            </div>
+
+            <div class="form-group">
+                <label for="inflation_rate">Inflation Rate:</label>
+                <input type="number" step="any" name="inflation_rate" id="inflation_rate" required>
+                <small>Range: 0% to 10%</small>
+            </div>
+
+            <div class="form-group">
+                <label for="profit_margin">Profit Margin:</label>
+                <input type="number" name="profit_margin" id="profit_margin" min="0.2" max="2.0" step="0.1" required>
+                <small>Range: 0.2 to 2.0</small>
+            </div>
+
+            <div class="form-group">
+                <label for="capital_expenditure">Capital Expenditure:</label>
+                <input type="number" step="any" name="capital_expenditure" id="capital_expenditure" required>
+                <small>Range: ₹0 to ₹25,000,000</small>
+            </div>
+
+            <div class="form-group">
+                <label for="revenue_growth">Revenue Growth:</label>
+                <input type="number" step="any" name="revenue_growth" id="revenue_growth" required>
+                <small>Range: 0% to 100%</small>
+            </div>
+
+            <div class="form-group">
+                <label for="interest_rate">Interest Rate:</label>
+                <input type="number" step="any" name="interest_rate" id="interest_rate" required>
+                <small>Range: 0% to 15%</small>
+            </div>
+
+            <div class="form-group">
+                <label for="gdp_growth_rate">GDP Growth Rate:</label>
+                <input type="number" step="any" name="gdp_growth_rate" id="gdp_growth_rate" required>
+                <small>Range: 0% to 10%</small>
+            </div>
+
+            <div class="form-group">
+                <label for="industry_type">Industry Type:</label>
+                <select name="industry_type" id="industry_type">
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Services">Services</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Agriculture">Agriculture</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Display prediction result -->
+        {% if prediction is not none %}
+            <div class="prediction">
+                <h3>Forecasted GST Liability: ₹{{ prediction }}</h3>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

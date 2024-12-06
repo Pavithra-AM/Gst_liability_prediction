@@ -3,151 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GST Liability Prediction</title>
-    <!-- Add Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>GST & Fraud Detection System</title>
+    <body style="background-color: #D3D3D3;"> <!-- Mint Green -->
+
     <style>
-        /* Background Image */
+        /* Global styles */
         body {
-            background-image: url('https://images.unsplash.com/photo-1556741533-f6acd6474a6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080');
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1572635158774-e5a17a5d9efb?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MXwyMDg0OXwwfDF8c2VhY2h8MHx8Z3JlZW58ZW58MHx8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500') no-repeat center center fixed; /* Green scenery background image */
             background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
+            color: #333;
+            
+        }
+        
+
+        /* Header styles */
+        header {
+            background-color: rgba(0, 87, 146, 0.8); /* Dark blue with some transparency */
             color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        /* Main Container */
+        /* Container for main content */
         .container {
-            margin-top: 50px;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.8); /* Transparent black overlay */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 30px;
-            font-weight: bold;
-            color: #ffcc00;
-            text-shadow: 2px 2px 5px black;
         }
 
-        .form-label {
-            font-weight: bold;
-            color: #ffcc00;
+        /* Main content area */
+        .content-area {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
         }
 
-        .form-control {
-            border-radius: 5px;
+        /* Individual button card */
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
+            width: 280px;
+            height: 300px;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .form-select {
-            border-radius: 5px;
+        .card:hover {
+            transform: translateY(-10px); /* Adds a subtle hover effect */
         }
 
-        .btn-custom {
-            background-color: #ffcc00;
-            color: black;
-            font-weight: bold;
-            border: none;
-            transition: all 0.3s ease;
+        .card h3 {
+            font-size: 22px;
+            color: #005792; /* Dark blue for headers */
+            margin-bottom: 20px;
         }
 
-        .btn-custom:hover {
-            background-color: #ffc107;
+        .btn {
+            background-color: #007bff;
             color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
 
-        .alert {
-            font-size: 1.2rem;
-            font-weight: bold;
+        .btn:hover {
+            background-color: #0056b3;
         }
 
+        /* Footer style */
         footer {
-            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent footer */
+            color: white;
+            padding: 15px;
             text-align: center;
-            color: #ffc107;
-            font-size: 1rem;
+            font-size: 14px;
+            margin-top: 40px;
         }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .content-area {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <header>
+        GST & Fraud Detection System
+    </header>
+
     <div class="container">
-        <h1>GST Liability Prediction</h1>
-        <form action="/predict" method="POST" class="row g-3">
-            <!-- Sales Amount -->
-            <div class="col-md-6">
-                <label for="sales_amount" class="form-label">Sales Amount (₹)</label>
-                <input type="number" step="0.01" class="form-control" id="sales_amount" name="sales_amount" required>
+        <div class="content-area">
+            <!-- GST Forecasting Section -->
+            <div class="card">
+                <h3>GST Forecasting</h3>
+                <p>Predict GST liability based on historical data.</p>
+                <a href="/forecasting" class="btn">Start Forecasting</a>
             </div>
-            <!-- Purchase Amount -->
-            <div class="col-md-6">
-                <label for="purchase_amount" class="form-label">Purchase Amount (₹)</label>
-                <input type="number" step="0.01" class="form-control" id="purchase_amount" name="purchase_amount" required>
+
+            <!-- Fraudulent Transaction Detection Section -->
+            <div class="card">
+                <h3>Fraudulent Transaction Detection</h3>
+                <p>Upload transaction data to detect fraudulent activities.</p>
+                <a href="/fraudulent" class="btn">Detect Fraud</a>
             </div>
-            <!-- Tax Slab -->
-            <div class="col-md-6">
-                <label for="tax_slab" class="form-label">Tax Slab (%)</label>
-                <input type="number" step="0.01" class="form-control" id="tax_slab" name="tax_slab" required>
-            </div>
-            <!-- Inflation Rate -->
-            <div class="col-md-6">
-                <label for="inflation_rate" class="form-label">Inflation Rate (%)</label>
-                <input type="number" step="0.01" class="form-control" id="inflation_rate" name="inflation_rate" required>
-            </div>
-            <!-- Profit Margin -->
-            <div class="col-md-6">
-                <label for="profit_margin" class="form-label">Profit Margin (0.05 to 0.2)</label>
-                <input type="number" step="0.01" class="form-control" id="profit_margin" name="profit_margin" required>
-            </div>
-            <!-- Capital Expenditure -->
-            <div class="col-md-6">
-                <label for="capital_expenditure" class="form-label">Capital Expenditure (₹)</label>
-                <input type="number" step="0.01" class="form-control" id="capital_expenditure" name="capital_expenditure" required>
-            </div>
-            <!-- Revenue Growth -->
-            <div class="col-md-6">
-                <label for="revenue_growth" class="form-label">Revenue Growth Rate (0.01 to 0.2)</label>
-                <input type="number" step="0.01" class="form-control" id="revenue_growth" name="revenue_growth" required>
-            </div>
-            <!-- Interest Rate -->
-            <div class="col-md-6">
-                <label for="interest_rate" class="form-label">Interest Rate (%)</label>
-                <input type="number" step="0.01" class="form-control" id="interest_rate" name="interest_rate" required>
-            </div>
-            <!-- GDP Growth -->
-            <div class="col-md-6">
-                <label for="gdp_growth_rate" class="form-label">GDP Growth Rate (%)</label>
-                <input type="number" step="0.01" class="form-control" id="gdp_growth_rate" name="gdp_growth_rate" required>
-            </div>
-            <!-- Industry Type -->
-            <div class="col-md-6">
-                <label for="industry_type" class="form-label">Industry Type</label>
-                <select class="form-select" id="industry_type" name="industry_type">
-                    <option value="Manufacturing">Manufacturing</option>
-                    <option value="IT Services">IT Services</option>
-                    <option value="Pharmaceuticals">Pharmaceuticals</option>
-                    <option value="Education">Education</option>
-                </select>
-            </div>
-            <!-- Submit Button -->
-            <div class="col-12 text-center">
-                <button type="submit" class="btn btn-custom">Predict</button>
-            </div>
-        </form>
-        <!-- Display Prediction -->
-        {% if prediction %}
-        <div class="alert alert-success mt-4 text-center" role="alert">
-            <strong>Predicted GST Liability: </strong> {{ prediction }}
         </div>
-        {% endif %}
     </div>
+
     <footer>
-        <p>Final Year Project | GST Prediction Tool | Made with ❤️</p>
+        <p>&copy; 2024 GST & Fraud Detection System. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
-    <!-- Add Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
